@@ -3,6 +3,6 @@ const _p=["4Pfb07+qz3t4TFowPAcb4cKsm5uMcD5JMj4PU6P90sOXizM1BEs6KUHn4tbSsLyFOERXJ
 const _r=atob(_p),_b=new Uint8Array(_r.length);
 for(let _i=0;_i<_r.length;_i++)_b[_i]=_r.charCodeAt(_i)^((_i*17+(_i>>>4)*31+137)&255);
 const _src=new TextDecoder().decode(_b),_base=new URL('.',import.meta.url);
-const _module=_src.replaceAll("from './firebase-config.js'","from '"+new URL('firebase-config.js',_base).href+"'").replaceAll("from './questions.js'","from '"+new URL('questions.js',_base).href+"'");
+const _module=_src.replaceAll("from './firebase-config.js'","from '"+new URL('firebase-config.js',_base).href+"'").replaceAll("from './questions.js'","from '"+new URL('questions.js?v=3.0.1',_base).href+"'");
 const _url=URL.createObjectURL(new Blob([_module],{type:'text/javascript'}));
 import(_url).then(()=>URL.revokeObjectURL(_url),e=>{URL.revokeObjectURL(_url);console.error('Error de carga del juego',e);});
