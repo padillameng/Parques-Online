@@ -4,6 +4,6 @@ const _r=atob(_d),_b=new Uint8Array(_r.length);
 for(let _i=0;_i<_r.length;_i++)_b[_i]=_r.charCodeAt(_i)^((_i*17+(_i>>>4)*31+163)&255);
 const _src=new TextDecoder().decode(_b);
 const _base=new URL('.',import.meta.url);
-const _module=_src.replaceAll("from './questions.js'","from '"+new URL('questions.js',_base).href+"'");
+const _module=_src.replaceAll("from './questions.js'","from '"+new URL('questions.js?v=3.0.1',_base).href+"'");
 const _url=URL.createObjectURL(new Blob([_module],{type:'text/javascript'}));
 import(_url).then(()=>URL.revokeObjectURL(_url),e=>{URL.revokeObjectURL(_url);console.error('Error de carga de demo',e);});
