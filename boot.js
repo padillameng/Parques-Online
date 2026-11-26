@@ -13,7 +13,7 @@ document.body.innerHTML=_u(_demo?_b:_a,_demo?211:151);
 const _style=document.createElement("style");
 _style.textContent=_u(_c,227)+(_demo?"\n"+_u(_d,189):"");
 document.head.appendChild(_style);
-const _module=_demo?"./demo.js?v=3.0.0":"./app.js?v=3.0.0";
+const _module=_demo?"./demo.js?v=3.0.1":"./app.js?v=3.0.1";
 import(_module).catch(e=>{
  const node=document.getElementById(_demo?"demo":"app");
  if(node) node.textContent="Error al cargar la aplicación. Actualiza la página para intentarlo de nuevo.";
