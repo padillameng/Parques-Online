@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Parqués Vial, semáforo">
+  <title>Parqués Vial</title>
+  <rect width="64" height="64" fill="#0B202B"/>
+  <rect x="20" y="5" width="24" height="54" fill="#173745" stroke="#F3C640" stroke-width="3"/>
+  <circle cx="32" cy="17" r="6" fill="#EE6872"/>
+  <circle cx="32" cy="32" r="6" fill="#F3C640"/>
+  <circle cx="32" cy="47" r="6" fill="#42BD8C"/>
+</svg>

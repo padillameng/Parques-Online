@@ -1,0 +1,34 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "rooms": {
+      "$code": {
+        ".read": "auth != null",
+        ".write": "auth != null && ((!data.exists() && newData.child('hostUid').val() === auth.uid && newData.child('status').val() === 'lobby') || (data.exists() && data.child('hostUid').val() === auth.uid))",
+        "rollRequests": {
+          "$turnId": {
+            ".write": "auth != null && !data.exists() && root.child('rooms').child($code).child('rulesVersion').val() === 'podio-historial-6' && root.child('rooms').child($code).child('status').val() === 'playing' && root.child('rooms').child($code).child('phase').val() === 'roll' && root.child('rooms').child($code).child('turnId').val() === $turnId && root.child('rooms').child($code).child('turnStartedAt').isNumber() && now < root.child('rooms').child($code).child('turnStartedAt').val() + 10000 && newData.child('uid').val() === auth.uid && newData.child('team').val() === root.child('rooms').child($code).child('activeTeam').val() && (root.child('rooms').child($code).child('teamSlots').child(newData.child('team').val()).child('1').child('uid').val() === auth.uid || root.child('rooms').child($code).child('teamSlots').child(newData.child('team').val()).child('2').child('uid').val() === auth.uid || root.child('rooms').child($code).child('teamSlots').child(newData.child('team').val()).child('3').child('uid').val() === auth.uid)",
+            ".validate": "newData.hasChildren(['uid','team','at']) && newData.child('at').isNumber() && newData.child('at').val() >= now - 5000 && newData.child('at').val() <= now + 1000"
+          }
+        },
+        "answers": {
+          "$turnId": {
+            "$team": {
+              ".write": "auth != null && !data.exists() && root.child('rooms').child($code).child('rulesVersion').val() === 'podio-historial-6' && root.child('rooms').child($code).child('status').val() === 'playing' && root.child('rooms').child($code).child('phase').val() === 'question' && root.child('rooms').child($code).child('turnId').val() === $turnId && root.child('rooms').child($code).child('questionStartedAt').isNumber() && root.child('rooms').child($code).child('questionPriorityMs').isNumber() && root.child('rooms').child($code).child('questionPriorityMs').val() >= 1000 && root.child('rooms').child($code).child('questionPriorityMs').val() <= 10000 && (root.child('rooms').child($code).child('teamSlots').child($team).child('1').child('uid').val() === auth.uid || root.child('rooms').child($code).child('teamSlots').child($team).child('2').child('uid').val() === auth.uid || root.child('rooms').child($code).child('teamSlots').child($team).child('3').child('uid').val() === auth.uid) && !root.child('rooms').child($code).child('eliminatedTeams').child($team).exists() && newData.child('uid').val() === auth.uid && newData.child('choice').isNumber() && newData.child('choice').val() >= 0 && newData.child('choice').val() <= 3 && ($team === root.child('rooms').child($code).child('activeTeam').val() || now >= root.child('rooms').child($code).child('questionStartedAt').val() + root.child('rooms').child($code).child('questionPriorityMs').val()) && now < root.child('rooms').child($code).child('questionStartedAt').val() + 20000",
+              ".validate": "newData.hasChildren(['uid','choice','at']) && newData.child('at').isNumber() && newData.child('at').val() >= now - 5000 && newData.child('at').val() <= now + 1000"
+            }
+          }
+        },
+        "teamSlots": {
+          "$team": {
+            "$slot": {
+              ".write": "auth != null && !data.exists() && root.child('rooms').child($code).child('rulesVersion').val() === 'podio-historial-6' && root.child('rooms').child($code).child('status').val() === 'lobby' && ($team === 'red' || $team === 'green' || $team === 'yellow' || $team === 'blue') && ($slot === '1' || $slot === '2' || $slot === '3') && newData.child('uid').val() === auth.uid && newData.child('team').val() === $team && newData.child('name').isString() && newData.child('name').val().length >= 2 && newData.child('name').val().length <= 32 && root.child('rooms').child($code).child('teamSlots').child('red').child('1').child('uid').val() !== auth.uid && root.child('rooms').child($code).child('teamSlots').child('red').child('2').child('uid').val() !== auth.uid && root.child('rooms').child($code).child('teamSlots').child('red').child('3').child('uid').val() !== auth.uid && root.child('rooms').child($code).child('teamSlots').child('green').child('1').child('uid').val() !== auth.uid && root.child('rooms').child($code).child('teamSlots').child('green').child('2').child('uid').val() !== auth.uid && root.child('rooms').child($code).child('teamSlots').child('green').child('3').child('uid').val() !== auth.uid && root.child('rooms').child($code).child('teamSlots').child('yellow').child('1').child('uid').val() !== auth.uid && root.child('rooms').child($code).child('teamSlots').child('yellow').child('2').child('uid').val() !== auth.uid && root.child('rooms').child($code).child('teamSlots').child('yellow').child('3').child('uid').val() !== auth.uid && root.child('rooms').child($code).child('teamSlots').child('blue').child('1').child('uid').val() !== auth.uid && root.child('rooms').child($code).child('teamSlots').child('blue').child('2').child('uid').val() !== auth.uid && root.child('rooms').child($code).child('teamSlots').child('blue').child('3').child('uid').val() !== auth.uid && newData.child('emoji').isString() && (newData.child('emoji').val() === '🏃' || newData.child('emoji').val() === '🏃‍♀️' || newData.child('emoji').val() === '🏃‍♂️' || newData.child('emoji').val() === '🚴' || newData.child('emoji').val() === '🚴‍♀️' || newData.child('emoji').val() === '🚴‍♂️' || newData.child('emoji').val() === '🏎️' || newData.child('emoji').val() === '🏍️' || newData.child('emoji').val() === '🏇' || newData.child('emoji').val() === '🛼')",
+              ".validate": "newData.hasChildren(['uid','name','team','emoji','joinedAt']) && newData.child('joinedAt').isNumber() && newData.child('joinedAt').val() >= now - 300000 && newData.child('joinedAt').val() <= now + 300000"
+            }
+          }
+        }
+      }
+    }
+  }
+}
